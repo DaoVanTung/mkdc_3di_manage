@@ -37,13 +37,13 @@ class ContentLayout extends StatelessWidget {
               children: [
                 Expanded(
                   child: Container(
-                    color: Colors.lightBlue,
+                    color: Colors.lightGreen,
                   ),
                 ),
                 const SizedBox(height: AppStyle.padding8),
                 Expanded(
                   child: Container(
-                    color: Colors.lightBlue,
+                    color: Colors.lightGreen,
                   ),
                 ),
               ],
@@ -53,7 +53,7 @@ class ContentLayout extends StatelessWidget {
           Expanded(
             flex: 7,
             child: Container(
-              color: Colors.lightBlue,
+              color: Colors.lightGreen,
             ),
           ),
         ],
