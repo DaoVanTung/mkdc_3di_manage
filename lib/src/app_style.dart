@@ -38,4 +38,5 @@ class AppStyle {
   static const whiteColor = Colors.white;
   static const blackColor = Colors.black;
   static const linkColor = Color(0xff1677FF);
+  static const dangerColor = Colors.amber;
 }
