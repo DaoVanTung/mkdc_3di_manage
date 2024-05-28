@@ -39,7 +39,7 @@ class NavBar extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Phần mềm thuộc MKDC chưa có tên',
+                  'Phần mềm mô phỏng thủy động lực 1D 2D',
                   style: Theme.of(context).textTheme.bodyLarge?.apply(
                         color: AppStyle.whiteColor,
                       ),
