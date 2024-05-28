@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mkdc_3di_manage/src/pages/login/login_page.dart';
+import 'package:mkdc_3di_manage/src/services/auth_service.dart';
 
 import '../../../app_style.dart';
 
@@ -70,7 +72,16 @@ class NavBar extends StatelessWidget {
                       child: const Text('Thông tin người dùng'),
                     ),
                     PopupMenuItem(
-                      onTap: () {},
+                      onTap: () {
+                        AuthService().logout().then((value) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const LoginPage(),
+                            ),
+                          );
+                        });
+                      },
                       child: const Text('Đăng xuất'),
                     ),
                   ],
