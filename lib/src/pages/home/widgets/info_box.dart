@@ -14,6 +14,7 @@ class InfoBox extends StatelessWidget {
         border: Border.all(color: Colors.grey.shade200),
       ),
       child: Material(
+        color: AppStyle.whiteColor,
         elevation: 3.0,
         child: Container(
           height: 160,

@@ -11,6 +11,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      backgroundColor: AppStyle.whiteColor,
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -11,6 +11,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = LoginController();
     return Scaffold(
+      backgroundColor: AppStyle.whiteColor,
       body: Center(
         child: Material(
           color: Colors.white,
