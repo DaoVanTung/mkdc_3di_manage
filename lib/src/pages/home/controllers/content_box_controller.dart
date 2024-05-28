@@ -21,9 +21,9 @@ class ContentBoxController extends ChangeNotifier {
   int numberOfPage = 0;
 
   ValueNotifier<bool> isLoading = ValueNotifier(false);
-  ValueNotifier<String> result = ValueNotifier('Init...');
 
   Future<List<SimulationModel>> getSimulations() async {
+    isLoading.value = true;
     simulations.clear();
 
     final body = await _threeDiService.getSimulations(
@@ -36,20 +36,32 @@ class ContentBoxController extends ChangeNotifier {
 
     for (final item in data['results']) {
       final simulation = SimulationModel(
-        id: '${item['simulation']['id']}',
-        name: '${item['simulation']['name']}',
-        model: 'model',
+        id: item['simulation']['id'].toString(),
+        name: item['simulation']['name'].toString(),
+        model: '',
         tags: List.from(item['simulation']['tags']),
-        username: '${item['user_name']}',
-        started: '${item['started']}',
-        finished: '${item['finished']}',
+        username: item['user_name'].toString(),
+        started: item['started'].toString(),
+        finished: item['finished'].toString(),
         totalTime: item['total_time'],
-        type: '${item['simulation_type']}',
+        type: item['simulation_type'].toString(),
+        status: item['status'].toString(),
       );
 
       simulations.add(simulation);
+
+      _threeDiService
+          .getModelById(id: item['simulation']['threedimodel_id'].toString())
+          .then(
+        (modelDataString) {
+          final modelInfo = jsonDecode(modelDataString);
+          simulation.model = modelInfo['name'];
+          notifyListeners();
+        },
+      );
     }
 
+    isLoading.value = false;
     return [];
   }
 }

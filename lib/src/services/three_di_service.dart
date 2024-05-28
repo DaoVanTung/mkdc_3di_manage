@@ -28,4 +28,20 @@ class ThreeDiService {
 
     return res.body;
   }
+
+  Future<String> getModelById({required String id}) async {
+    const host = 'https://api.3di.tecotec.vn/v3';
+    final url = '$host/threedimodels/$id/';
+    const token =
+        'X19rZXlfXzpuRjdra0hPOC5BUERCMWF2cDR4eFJRQ0dBczJnU0FrZVFsVnZXdXUyWA==';
+
+    final res = await http.get(
+      Uri.parse(url),
+      headers: {
+        'Authorization': 'Basic $token',
+      },
+    );
+
+    return res.body;
+  }
 }

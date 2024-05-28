@@ -1,18 +1,14 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-
 class SimulationModel {
-  final String id;
-  final String name;
-  final String model;
-  final List<String> tags;
-  final String username;
-  final String started;
-  final String finished;
-  final int totalTime;
-  final String type;
+  String id;
+  String name;
+  String model;
+  List<String> tags;
+  String username;
+  String started;
+  String finished;
+  int totalTime;
+  String type;
+  String status;
 
   SimulationModel({
     required this.id,
@@ -24,6 +20,7 @@ class SimulationModel {
     required this.finished,
     required this.totalTime,
     required this.type,
+    required this.status,
   });
 
   SimulationModel copyWith({
@@ -36,6 +33,7 @@ class SimulationModel {
     String? finished,
     int? totalTime,
     String? type,
+    String? status,
   }) {
     return SimulationModel(
       id: id ?? this.id,
@@ -47,72 +45,7 @@ class SimulationModel {
       finished: finished ?? this.finished,
       totalTime: totalTime ?? this.totalTime,
       type: type ?? this.type,
+      status: status ?? this.status,
     );
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'name': name,
-      'model': model,
-      'tags': tags,
-      'username': username,
-      'started': started,
-      'finished': finished,
-      'totalTime': totalTime,
-      'type': type,
-    };
-  }
-
-  factory SimulationModel.fromMap(Map<String, dynamic> map) {
-    return SimulationModel(
-      id: map['id'] as String,
-      name: map['name'] as String,
-      model: map['model'] as String,
-      tags: List<String>.from((map['tags'] as List<String>)),
-      username: map['username'] as String,
-      started: map['started'] as String,
-      finished: map['finished'] as String,
-      totalTime: map['totalTime'] as int,
-      type: map['type'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory SimulationModel.fromJson(String source) =>
-      SimulationModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() {
-    return 'SimulationModel(id: $id, name: $name, model: $model, tags: $tags, username: $username, started: $started, finished: $finished, totalTime: $totalTime, type: $type)';
-  }
-
-  @override
-  bool operator ==(covariant SimulationModel other) {
-    if (identical(this, other)) return true;
-
-    return other.id == id &&
-        other.name == name &&
-        other.model == model &&
-        listEquals(other.tags, tags) &&
-        other.username == username &&
-        other.started == started &&
-        other.finished == finished &&
-        other.totalTime == totalTime &&
-        other.type == type;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-        name.hashCode ^
-        model.hashCode ^
-        tags.hashCode ^
-        username.hashCode ^
-        started.hashCode ^
-        finished.hashCode ^
-        totalTime.hashCode ^
-        type.hashCode;
   }
 }
