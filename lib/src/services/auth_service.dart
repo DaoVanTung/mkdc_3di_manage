@@ -36,6 +36,9 @@ class AuthService {
     final response = await http.post(urlToken, body: body);
     final responseBody = jsonDecode(response.body) as Map<String, dynamic>;
 
+    // print(responseBody['access_token']);
+    // print(responseBody['id_token']);
+
     await storage.write(
       key: 'access_token',
       value: responseBody['access_token'],
@@ -58,6 +61,10 @@ class AuthService {
     await storage.delete(key: 'access_token');
     await storage.delete(key: 'id_token');
     html.window.location.replace(url);
-    // removeAllQueryParams();
+  }
+
+  Future<void> validateToken() async {
+    // final accessToken = await storage.read(key: 'access_token');
+    // const url = '${AppConstant.ssoHost}/oauth2/introspect';
   }
 }

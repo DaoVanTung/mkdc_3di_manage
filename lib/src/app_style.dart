@@ -31,6 +31,5 @@ class AppStyle {
   static const whiteColor = Colors.white;
   static const blackColor = Colors.black;
   static const dangerColor = Colors.amber;
-  static const lightBlueColor = Colors.lightBlue;
   static const menuColor = Color(0xff1F325C);
 }

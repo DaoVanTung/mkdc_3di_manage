@@ -61,7 +61,7 @@ class AlertBox extends StatelessWidget {
                   style: OutlinedButton.styleFrom(
                     shape: const RoundedRectangleBorder(),
                     side: BorderSide.none,
-                    backgroundColor: Colors.redAccent,
+                    backgroundColor: AppStyle.menuColor,
                   ),
                   child: const Text(
                     'Kích hoạt',
@@ -100,7 +100,7 @@ class _LicenseFormState extends State<LicenseForm> {
           children: [
             Container(
               padding: const EdgeInsets.all(AppStyle.padding8),
-              color: AppStyle.lightBlueColor,
+              color: AppStyle.menuColor,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -174,7 +174,7 @@ class _LicenseFormState extends State<LicenseForm> {
                       style: ElevatedButton.styleFrom(
                         shape: const RoundedRectangleBorder(),
                         side: BorderSide.none,
-                        backgroundColor: AppStyle.lightBlueColor,
+                        backgroundColor: AppStyle.menuColor,
                       ),
                       child: const Text(
                         'Xác nhận',

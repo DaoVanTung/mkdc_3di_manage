@@ -8,6 +8,6 @@ class AppConstant {
   static const ssoHost = 'https://sso.mkdc.vn';
   static const clientHost = 'http://localhost:5000/';
   static const callbackUrl = 'http://localhost:5000/callback.html';
-  static const clientId = '0jHMauaBk83FZ_DTGoW6XABKdq0a';
-  static const secretKey = 'AEDNmfBcNwBaIRLUGofKtv0ZHtoa';
+  static const clientId = 'V6GB7MiDaQpImESgfXY6qNRVW3sa';
+  static const secretKey = 'DEeg9r06RqKf9fNCwa1rEaUxJWga';
 }
