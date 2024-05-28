@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mkdc_3di_manage/src/pages/login/login_page.dart';
-import 'package:mkdc_3di_manage/src/services/auth_service.dart';
 
 import '../../../app_style.dart';
+import '../../../services/auth_service.dart';
+import '../../login/login_page.dart';
+import '../../settings/controllers/settings_controller.dart';
+import 'license_form.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({
@@ -49,47 +51,78 @@ class NavBar extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.settings,
-                    color: AppStyle.whiteColor,
-                    size: AppStyle.fontSize20,
-                  ),
-                ),
-                const SizedBox(width: AppStyle.padding16),
-                const CircleAvatar(
-                  radius: AppStyle.padding12,
-                  backgroundImage: AssetImage('assets/images/avatar.webp'),
-                ),
-                const SizedBox(width: AppStyle.padding16),
                 PopupMenuButton(
                   color: AppStyle.whiteColor,
                   tooltip: '',
                   itemBuilder: (_) => [
                     PopupMenuItem(
                       onTap: () {},
-                      child: const Text('Thông tin người dùng'),
+                      child: const Text('Hỗ trợ'),
                     ),
+                    if (!SettingsController().isActive)
+                      PopupMenuItem(
+                        onTap: () {
+                          onActiveButtonPressed(context);
+                        },
+                        child: const Text('Kích hoạt'),
+                      ),
                     PopupMenuItem(
-                      onTap: () {
-                        AuthService().logout().then((value) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const LoginPage(),
-                            ),
-                          );
-                        });
-                      },
-                      child: const Text('Đăng xuất'),
+                      onTap: () {},
+                      child: const Text('Người dùng'),
                     ),
                   ],
-                  child: const Icon(
-                    Icons.keyboard_arrow_down_rounded,
-                    color: AppStyle.whiteColor,
-                    size: 20,
+                  child: const Text(
+                    'Help',
+                    style: TextStyle(
+                      color: AppStyle.whiteColor,
+                    ),
                   ),
+                ),
+                const SizedBox(width: AppStyle.padding16),
+                // PopupMenuButton(
+                //   color: AppStyle.whiteColor,
+                //   tooltip: 'Thao tác với người dùng',
+                //   itemBuilder: (_) => [
+                //     PopupMenuItem(
+                //       onTap: () {},
+                //       child: const Text('Thông tin người dùng'),
+                //     ),
+                //     PopupMenuItem(
+                //       onTap: () {
+                //         AuthService().logout().then((value) {
+                //           Navigator.pushReplacement(
+                //             context,
+                //             MaterialPageRoute(
+                //               builder: (_) => const LoginPage(),
+                //             ),
+                //           );
+                //         });
+                //       },
+                //       child: const Text('Đăng xuất'),
+                //     ),
+                //   ],
+                //   child: const CircleAvatar(
+                //     radius: AppStyle.padding12,
+                //     backgroundImage: AssetImage('assets/images/avatar.webp'),
+                //   ),
+                // ),
+                IconButton(
+                  onPressed: () {
+                    AuthService().logout().then((value) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const LoginPage(),
+                        ),
+                      );
+                    });
+                  },
+                  icon: const Icon(
+                    Icons.logout,
+                    color: AppStyle.whiteColor,
+                  ),
+                  iconSize: AppStyle.iconSize20,
+                  splashRadius: AppStyle.iconSize24,
                 ),
               ],
             ),
@@ -97,5 +130,27 @@ class NavBar extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> onActiveButtonPressed(BuildContext context) async {
+    await showDialog<bool>(
+      context: context,
+      builder: (_) => const LicenseForm(),
+    ).then((isValidLicense) {
+      if (isValidLicense == null) {
+        return;
+      }
+      if (isValidLicense == true) {
+        showDialog(
+          context: context,
+          builder: (_) => const SuccessDialog(),
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (_) => const ErrorDialog(),
+        );
+      }
+    });
   }
 }

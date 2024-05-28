@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mkdc_3di_manage/src/app_style.dart';
 
-import 'widgets/alert_box.dart';
+import '../../app_style.dart';
 import 'widgets/nav_bar.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,9 +12,7 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           NavBar(),
-          AlertBox(),
           Expanded(child: ContentLayout()),
-          SizedBox(height: AppStyle.padding8),
         ],
       ),
     );
@@ -28,7 +25,7 @@ class ContentLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppStyle.padding8),
+      margin: const EdgeInsets.all(AppStyle.padding8),
       child: Row(
         children: [
           Expanded(
@@ -37,13 +34,17 @@ class ContentLayout extends StatelessWidget {
               children: [
                 Expanded(
                   child: Container(
-                    color: Colors.lightGreen,
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                    ),
                   ),
                 ),
                 const SizedBox(height: AppStyle.padding8),
                 Expanded(
                   child: Container(
-                    color: Colors.lightGreen,
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                    ),
                   ),
                 ),
               ],
@@ -53,7 +54,9 @@ class ContentLayout extends StatelessWidget {
           Expanded(
             flex: 7,
             child: Container(
-              color: Colors.lightGreen,
+              decoration: BoxDecoration(
+                border: Border.all(),
+              ),
             ),
           ),
         ],
