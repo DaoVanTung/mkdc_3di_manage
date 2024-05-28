@@ -33,9 +33,7 @@
                 "-d",
                 "chrome",
                 "--web-port",
-                "5000",
-                "--web-browser-flag",
-                "--disable-web-security"
+                "5000"
             ],
             "program": "lib/main.dart"
         },

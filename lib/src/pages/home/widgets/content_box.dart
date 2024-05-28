@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:number_paginator/number_paginator.dart';
 
 import '../../../app_style.dart';
 import '../controllers/content_box_controller.dart';
@@ -114,37 +115,68 @@ class SimulationDataTable extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = ContentBoxController();
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: ListenableBuilder(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: ListenableBuilder(
+            listenable: controller,
+            builder: (context, child) {
+              return DataTable(
+                columns: const [
+                  DataColumn(label: Text('ID')),
+                  DataColumn(label: Text('Name')),
+                  DataColumn(label: Text('Model')),
+                  DataColumn(label: Text('User')),
+                  DataColumn(label: Text('Status')),
+                  DataColumn(label: Text('Type')),
+                  DataColumn(label: Text('Start Time')),
+                  DataColumn(label: Text('Length')),
+                ],
+                rows: [
+                  for (final item in controller.simulations)
+                    DataRow(cells: [
+                      DataCell(Text(item.id)),
+                      DataCell(Text(item.name)),
+                      DataCell(Text(item.model)),
+                      DataCell(Text(item.username)),
+                      DataCell(Text(item.status)),
+                      DataCell(Text(item.type)),
+                      DataCell(Text(item.started)),
+                      DataCell(Text(formatTotalTime(item.totalTime))),
+                    ]),
+                ],
+              );
+            },
+          ),
+        ),
+        ListenableBuilder(
           listenable: controller,
           builder: (context, child) {
-            return DataTable(
-              columns: const [
-                DataColumn(label: Text('ID')),
-                DataColumn(label: Text('Name')),
-                DataColumn(label: Text('Model')),
-                DataColumn(label: Text('User')),
-                DataColumn(label: Text('Status')),
-                DataColumn(label: Text('Type')),
-                DataColumn(label: Text('Start Time')),
-                DataColumn(label: Text('Length')),
-              ],
-              rows: [
-                for (final item in controller.simulations)
-                  DataRow(cells: [
-                    DataCell(Text(item.id)),
-                    DataCell(Text(item.name)),
-                    DataCell(Text(item.model)),
-                    DataCell(Text(item.username)),
-                    DataCell(Text(item.status)),
-                    DataCell(Text(item.type)),
-                    DataCell(Text(item.type)),
-                    DataCell(Text(formatTotalTime(item.totalTime))),
-                  ]),
-              ],
+            return Container(
+              margin: const EdgeInsets.only(top: AppStyle.padding8),
+              height: 48,
+              width: 440,
+              child: NumberPaginator(
+                initialPage: controller.currentPage,
+                numberPages: controller.numberOfPage,
+                onPageChange: (int index) {
+                  controller.currentPage = index;
+                  controller.getSimulations();
+                },
+                config: NumberPaginatorUIConfig(
+                  buttonShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  buttonSelectedBackgroundColor: AppStyle.menuColor,
+                  buttonUnselectedForegroundColor: AppStyle.menuColor,
+                ),
+              ),
             );
-          }),
+          },
+        ),
+      ],
     );
   }
 

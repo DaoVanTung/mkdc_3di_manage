@@ -16,8 +16,8 @@ class ContentBoxController extends ChangeNotifier {
 
   List<SimulationModel> simulations = [];
 
-  int currentPage = 1; // Trang hiện tại, bắt đầu từ 1
-  int itemsPerPage = 10; // Số lượng bản ghi trên mỗi trang
+  int currentPage = 0;
+  int itemsPerPage = 10;
   int numberOfPage = 0;
 
   ValueNotifier<bool> isLoading = ValueNotifier(false);

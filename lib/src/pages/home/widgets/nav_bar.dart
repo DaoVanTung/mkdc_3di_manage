@@ -55,10 +55,6 @@ class NavBar extends StatelessWidget {
                   color: AppStyle.whiteColor,
                   tooltip: '',
                   itemBuilder: (_) => [
-                    PopupMenuItem(
-                      onTap: () {},
-                      child: const Text('Hỗ trợ'),
-                    ),
                     if (!SettingsController().isActive)
                       PopupMenuItem(
                         onTap: () {
@@ -68,7 +64,11 @@ class NavBar extends StatelessWidget {
                       ),
                     PopupMenuItem(
                       onTap: () {},
-                      child: const Text('Người dùng'),
+                      child: const Text('Tài liệu hướng dẫn'),
+                    ),
+                    PopupMenuItem(
+                      onTap: () {},
+                      child: const Text('Hỗ trợ'),
                     ),
                   ],
                   child: const Text(
@@ -79,50 +79,38 @@ class NavBar extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: AppStyle.padding16),
-                // PopupMenuButton(
-                //   color: AppStyle.whiteColor,
-                //   tooltip: 'Thao tác với người dùng',
-                //   itemBuilder: (_) => [
-                //     PopupMenuItem(
-                //       onTap: () {},
-                //       child: const Text('Thông tin người dùng'),
-                //     ),
-                //     PopupMenuItem(
-                //       onTap: () {
-                //         AuthService().logout().then((value) {
-                //           Navigator.pushReplacement(
-                //             context,
-                //             MaterialPageRoute(
-                //               builder: (_) => const LoginPage(),
-                //             ),
-                //           );
-                //         });
-                //       },
-                //       child: const Text('Đăng xuất'),
-                //     ),
-                //   ],
-                //   child: const CircleAvatar(
-                //     radius: AppStyle.padding12,
-                //     backgroundImage: AssetImage('assets/images/avatar.webp'),
-                //   ),
-                // ),
-                IconButton(
-                  onPressed: () {
-                    AuthService().logout().then((value) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const LoginPage(),
-                        ),
-                      );
-                    });
-                  },
-                  icon: const Icon(
-                    Icons.logout,
+                const CircleAvatar(
+                  radius: AppStyle.padding12,
+                  backgroundImage: AssetImage('assets/images/avatar.webp'),
+                ),
+                const SizedBox(width: AppStyle.padding16),
+                PopupMenuButton(
+                  color: AppStyle.whiteColor,
+                  tooltip: 'Thao tác với người dùng',
+                  itemBuilder: (_) => [
+                    PopupMenuItem(
+                      onTap: () {},
+                      child: const Text('Thông tin người dùng'),
+                    ),
+                    PopupMenuItem(
+                      onTap: () {
+                        AuthService().logout().then((value) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const LoginPage(),
+                            ),
+                          );
+                        });
+                      },
+                      child: const Text('Đăng xuất'),
+                    ),
+                  ],
+                  child: const Icon(
+                    Icons.keyboard_arrow_down_rounded,
                     color: AppStyle.whiteColor,
+                    size: AppStyle.iconSize20,
                   ),
-                  iconSize: AppStyle.iconSize20,
-                  splashRadius: AppStyle.iconSize24,
                 ),
               ],
             ),
