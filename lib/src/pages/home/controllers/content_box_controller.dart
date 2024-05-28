@@ -94,7 +94,12 @@ class ContentBoxController extends ChangeNotifier {
       final fileInfo = json.decode(await _threeDiService.getDownloadFile(
         fileId: data[i]['id'].toString(),
       ));
-      data[i]['url'] = fileInfo['get_url'];
+
+      try {
+        data[i]['url'] = fileInfo['get_url'];
+      } catch (e) {
+        data[i]['url'] = '#';
+      }
     }
 
     final gridAdminData = json.decode(

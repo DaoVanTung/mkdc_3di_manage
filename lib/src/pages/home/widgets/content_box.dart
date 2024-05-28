@@ -233,6 +233,7 @@ class SimulationInfoBox extends StatelessWidget {
             IconButton(
               onPressed: () {
                 controller.simulationSelected.value = null;
+                controller.simulationFiles.value = null;
               },
               icon: const Icon(
                 Icons.close,
