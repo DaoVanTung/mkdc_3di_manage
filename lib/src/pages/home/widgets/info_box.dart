@@ -40,11 +40,11 @@ class InfoBox extends StatelessWidget {
                   series: <CartesianSeries<UserData, String>>[
                     ColumnSeries<UserData, String>(
                       dataSource: [
-                        UserData('1/2024', 35),
-                        UserData('2/2024', 28),
-                        UserData('3/2024', 34),
-                        UserData('4/2024', 32),
-                        UserData('5/2024', 40),
+                        UserData('1/2024', 0),
+                        UserData('2/2024', 0),
+                        UserData('3/2024', 0),
+                        UserData('4/2024', 0),
+                        UserData('5/2024', 0),
                       ],
                       xValueMapper: (UserData users, _) => users.time,
                       yValueMapper: (UserData users, _) => users.length,

@@ -172,7 +172,7 @@ class SimulationDataTable extends StatelessWidget {
     final controller = ContentBoxController();
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
@@ -209,12 +209,17 @@ class SimulationDataTable extends StatelessWidget {
         ),
         const SizedBox(height: AppStyle.padding8),
         Expanded(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: ListenableBuilder(
-              listenable: controller,
-              builder: (context, child) {
-                return SingleChildScrollView(
+          child: ListenableBuilder(
+            listenable: controller,
+            builder: (context, child) {
+              if (controller.simulations.isEmpty) {
+                return const Center(
+                  child: Text('Không có dữ liệu'),
+                );
+              }
+              return SingleChildScrollView(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
                   child: DataTable(
                     showCheckboxColumn: false,
                     headingRowColor: const WidgetStatePropertyAll(
@@ -225,13 +230,13 @@ class SimulationDataTable extends StatelessWidget {
                     ),
                     columns: const [
                       DataColumn(label: Text('ID')),
-                      DataColumn(label: Text('Name')),
+                      DataColumn(label: Text('Tên')),
                       DataColumn(label: Text('Model')),
-                      DataColumn(label: Text('User')),
-                      DataColumn(label: Text('Status')),
-                      DataColumn(label: Text('Type')),
-                      DataColumn(label: Text('Start Time')),
-                      DataColumn(label: Text('Length')),
+                      DataColumn(label: Text('Người dùng')),
+                      DataColumn(label: Text('Trạng thái')),
+                      DataColumn(label: Text('Kiểu')),
+                      DataColumn(label: Text('Ngày bắt đầu')),
+                      DataColumn(label: Text('Thời gian thực hiện')),
                     ],
                     rows: [
                       for (final item in controller.simulations)
@@ -260,35 +265,44 @@ class SimulationDataTable extends StatelessWidget {
                         ),
                     ],
                   ),
+                ),
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: AppStyle.padding8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ListenableBuilder(
+              listenable: controller,
+              builder: (context, child) {
+                if (controller.simulations.isEmpty) {
+                  return const SizedBox();
+                }
+                return Container(
+                  margin: const EdgeInsets.only(top: AppStyle.padding8),
+                  height: 48,
+                  width: 440,
+                  child: NumberPaginator(
+                    initialPage: controller.currentPage,
+                    numberPages: controller.numberOfPage,
+                    onPageChange: (int index) {
+                      controller.currentPage = index;
+                      controller.getSimulations();
+                    },
+                    config: NumberPaginatorUIConfig(
+                      buttonShape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      buttonSelectedBackgroundColor: AppStyle.menuColor,
+                      buttonUnselectedForegroundColor: AppStyle.menuColor,
+                    ),
+                  ),
                 );
               },
             ),
-          ),
-        ),
-        ListenableBuilder(
-          listenable: controller,
-          builder: (context, child) {
-            return Container(
-              margin: const EdgeInsets.only(top: AppStyle.padding8),
-              height: 48,
-              width: 440,
-              child: NumberPaginator(
-                initialPage: controller.currentPage,
-                numberPages: controller.numberOfPage,
-                onPageChange: (int index) {
-                  controller.currentPage = index;
-                  controller.getSimulations();
-                },
-                config: NumberPaginatorUIConfig(
-                  buttonShape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  buttonSelectedBackgroundColor: AppStyle.menuColor,
-                  buttonUnselectedForegroundColor: AppStyle.menuColor,
-                ),
-              ),
-            );
-          },
+          ],
         ),
       ],
     );
@@ -344,7 +358,7 @@ class SimulationInfoBox extends StatelessWidget {
                 children: [
                   Expanded(
                     child: SimulationTextItem(
-                      title: 'Name',
+                      title: 'Tên',
                       value: simulation.name,
                     ),
                   ),
@@ -361,13 +375,13 @@ class SimulationInfoBox extends StatelessWidget {
                 children: [
                   Expanded(
                     child: SimulationTextItem(
-                      title: 'Start time',
+                      title: 'Ngày bắt đầu',
                       value: simulation.started,
                     ),
                   ),
                   Expanded(
                     child: SimulationTextItem(
-                      title: 'End time',
+                      title: 'Ngày kết thúc',
                       value: simulation.finished,
                     ),
                   ),

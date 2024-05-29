@@ -8,7 +8,7 @@ class ThreeDiService {
     return _instance;
   }
   final host = 'https://api.3di.tecotec.vn/v3';
-  // final orgId = 'd4b61876a9f6440f982a39f173fd73e0';
+  final orgId = '0d41c6f8e6184a0b9f763814f67b8497';
   final token =
       'X19rZXlfXzpTSW5iUWxNYS5Pc3k3dlR6VUM2UFhsV21ld2VFMDZ1ZVFZdHkwdUE0eA==';
 
@@ -18,7 +18,7 @@ class ThreeDiService {
     String? keyword,
   }) async {
     final url = StringBuffer('$host/usage/?');
-    // url.write('simulation__organisation__unique_id=$orgId');
+    url.write('simulation__organisation__unique_id=$orgId');
     url.write('&limit=$limit&offset=$offset');
     if (keyword != null) {
       url.write('&simulation__name__icontains=$keyword');

@@ -57,7 +57,7 @@ class OrgInfo extends StatelessWidget {
               Expanded(
                 flex: 13,
                 child: Text(
-                  'MKDC',
+                  'MKDC-SIMCENTER',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                   ),
@@ -75,7 +75,7 @@ class OrgInfo extends StatelessWidget {
               Expanded(
                 flex: 13,
                 child: Text(
-                  'fd3d2fe443jkhsdf723haks72ad2fe443jkf',
+                  '0d41c6f8e6184a0b9f763814f67b8497',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                   ),
@@ -106,33 +106,36 @@ class UserList extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppStyle.padding8),
-        ListenableBuilder(
-          listenable: controller,
-          builder: (context, child) {
-            return SingleChildScrollView(
-              child: DataTable(
-                columns: const [
-                  DataColumn(label: Text('ID')),
-                  DataColumn(label: Text('Tên người dùng')),
-                  DataColumn(label: Text('Họ')),
-                  DataColumn(label: Text('Tên')),
-                  DataColumn(label: Text('Email')),
-                ],
-                rows: [
-                  for (final item in controller.users)
-                    DataRow(
-                      cells: [
-                        DataCell(Text(item.id.toString())),
-                        DataCell(Text(item.username)),
-                        DataCell(Text(item.firstName)),
-                        DataCell(Text(item.lastName)),
-                        DataCell(Text(item.email)),
-                      ],
-                    ),
-                ],
-              ),
-            );
-          },
+        SizedBox(
+          width: double.infinity,
+          child: ListenableBuilder(
+            listenable: controller,
+            builder: (context, child) {
+              return SingleChildScrollView(
+                child: DataTable(
+                  columns: const [
+                    DataColumn(label: Text('ID')),
+                    DataColumn(label: Text('Tên người dùng')),
+                    DataColumn(label: Text('Họ')),
+                    DataColumn(label: Text('Tên')),
+                    DataColumn(label: Text('Email')),
+                  ],
+                  rows: [
+                    for (final item in controller.users)
+                      DataRow(
+                        cells: [
+                          DataCell(Text(item.id.toString())),
+                          DataCell(Text(item.username)),
+                          DataCell(Text(item.firstName)),
+                          DataCell(Text(item.lastName)),
+                          DataCell(Text(item.email)),
+                        ],
+                      ),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ],
     );
