@@ -21,6 +21,7 @@ class ContentBoxController extends ChangeNotifier {
   int itemsPerPage = 15;
   int numberOfPage = 0;
   String? currentKeyword;
+  ValueNotifier<int> numberOfSimulation = ValueNotifier(0);
 
   ValueNotifier<bool> isLoading = ValueNotifier(false);
 
@@ -35,6 +36,7 @@ class ContentBoxController extends ChangeNotifier {
     );
     final data = json.decode(body);
 
+    numberOfSimulation.value = data['count'] ?? 0;
     numberOfPage = ((data['count'] + itemsPerPage - 1) / itemsPerPage).toInt();
 
     if (numberOfPage <= 0) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mkdc_3di_manage/src/pages/settings/settings_page.dart';
 
 import '../../../app_style.dart';
 import '../../../services/auth_service.dart';
@@ -68,7 +69,12 @@ class NavBar extends StatelessWidget {
                     ),
                     PopupMenuItem(
                       onTap: () {
-                        showAboutDialog(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const SettingsPage(),
+                          ),
+                        );
                       },
                       child: const Text('Cấu hình'),
                     ),

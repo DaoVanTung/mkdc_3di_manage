@@ -98,4 +98,30 @@ class ThreeDiService {
 
     return res.body;
   }
+
+  Future<String> getUsers() async {
+    final url = '$host/auth/users/';
+
+    final res = await http.get(
+      Uri.parse(url),
+      headers: {
+        'Authorization': 'Basic $token',
+      },
+    );
+
+    return res.body;
+  }
+
+  Future<String> getApiKeys() async {
+    const url = 'https://api.3di.tecotec.vn/v3-beta/personalapikeys/';
+
+    final res = await http.get(
+      Uri.parse(url),
+      headers: {
+        'Authorization': 'Basic $token',
+      },
+    );
+
+    return res.body;
+  }
 }

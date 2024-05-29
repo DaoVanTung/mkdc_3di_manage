@@ -1,5 +1,11 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+import '../../../models/api_key_model.dart';
+import '../../../models/user_model.dart';
+import '../../../services/three_di_service.dart';
 import '../services/settings_service.dart';
 
 class SettingsController with ChangeNotifier {
@@ -8,12 +14,18 @@ class SettingsController with ChangeNotifier {
   factory SettingsController() => _controller;
 
   final _settingsService = SettingsService();
+  final _threeDiService = ThreeDiService();
+
   bool isActive = false;
+  ValueNotifier<int> numberOfUser = ValueNotifier(0);
+  List<UserModel> users = [];
+  List<ApiKeyModel> apiKeys = [];
 
   Future<void> loadSettings() async {
     final license = await _settingsService.getLicense();
     if (license.isNotEmpty) {
       isActive = true;
+      getUsers();
     }
 
     // _settingsService.removeLicense();
@@ -38,5 +50,45 @@ class SettingsController with ChangeNotifier {
     final finalLicense =
         license.replaceAll(RegExp(r'\s+'), ' ').trim().replaceAll(' ', '');
     return finalLicense == fixedLicense;
+  }
+
+  Future<void> getUsers() async {
+    final usersData = jsonDecode(await _threeDiService.getUsers());
+
+    numberOfUser.value = usersData['count'] ?? 0;
+
+    for (final data in usersData['results']) {
+      users.add(
+        UserModel(
+          id: data['id'],
+          username: data['username'].toString(),
+          firstName: data['first_name'].toString(),
+          lastName: data['last_name'].toString(),
+          email: data['email'].toString(),
+        ),
+      );
+    }
+
+    notifyListeners();
+  }
+
+  Future<void> getApiKeys() async {
+    final apiKeysData = jsonDecode(await _threeDiService.getApiKeys());
+
+    for (final data in apiKeysData['results']) {
+      apiKeys.add(
+        ApiKeyModel(
+          prefix: data['prefix'],
+          scope: data['scope'],
+          name: data['name'],
+          created: data['created'],
+          revoked: data['revoked'],
+          lastUsed: data['last_used'],
+          expiryDate: data['expiry_date'],
+        ),
+      );
+    }
+
+    notifyListeners();
   }
 }

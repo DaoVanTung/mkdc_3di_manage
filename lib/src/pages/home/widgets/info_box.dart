@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../app_style.dart';
+import '../../settings/controllers/settings_controller.dart';
+import '../controllers/content_box_controller.dart';
 
 class InfoBox extends StatelessWidget {
   const InfoBox({super.key});
@@ -81,26 +84,23 @@ class NumberOfGroup extends StatelessWidget {
         children: [
           const Text('Người dùng'),
           const SizedBox(height: AppStyle.padding8),
-          RichText(
-            text: const TextSpan(
-              children: [
-                TextSpan(
-                  text: '25',
-                  style: TextStyle(
-                    fontSize: 48,
-                    fontWeight: FontWeight.w300,
-                  ),
+          ValueListenableBuilder(
+            valueListenable: SettingsController().numberOfUser,
+            builder: (context, numberOfUser, child) {
+              return RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: numberOfUser.toString(),
+                      style: const TextStyle(
+                        fontSize: 48,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
                 ),
-                // TextSpan(
-                //   text: ' / 25',
-                //   style: TextStyle(
-                //     fontSize: AppStyle.fontSize20,
-                //     fontWeight: FontWeight.w300,
-                //     color: Colors.grey,
-                //   ),
-                // ),
-              ],
-            ),
+              );
+            },
           ),
         ],
       ),
@@ -117,26 +117,23 @@ class NumberOfUser extends StatelessWidget {
       children: [
         const Text('Simulation'),
         const SizedBox(height: AppStyle.padding8),
-        RichText(
-          text: const TextSpan(
-            children: [
-              TextSpan(
-                text: '52',
-                style: TextStyle(
-                  fontSize: 48,
-                  fontWeight: FontWeight.w300,
-                ),
+        ValueListenableBuilder(
+          valueListenable: ContentBoxController().numberOfSimulation,
+          builder: (context, numberOfSimulation, child) {
+            return RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: numberOfSimulation.toString(),
+                    style: const TextStyle(
+                      fontSize: 48,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ],
               ),
-              // TextSpan(
-              //   text: ' / 150',
-              //   style: TextStyle(
-              //     fontSize: AppStyle.fontSize20,
-              //     fontWeight: FontWeight.w300,
-              //     color: Colors.grey,
-              //   ),
-              // ),
-            ],
-          ),
+            );
+          },
         ),
       ],
     );
