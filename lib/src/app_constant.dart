@@ -6,8 +6,8 @@ class AppConstant {
   }
 
   static const ssoHost = 'https://sso.mkdc.vn';
-  static const clientHost = 'http://localhost:5000/';
-  static const callbackUrl = 'http://localhost:5000/callback.html';
+  static const clientHost = 'https://lsimcenter.mkdc.com.vn/';
+  static const callbackUrl = 'https://simcenter.mkdc.com.vn/callback.html';
   static const clientId = '_PkL507mp9D92g1PSoQzdMG98iga';
   static const secretKey = 'rNKoABIiKbLNNYtJe5adQnddPcga';
 }

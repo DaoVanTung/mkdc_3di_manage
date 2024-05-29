@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../../app_style.dart';
+import '../home/home_page.dart';
 import '../home/widgets/license_form.dart';
 import '../settings/controllers/settings_controller.dart';
 
@@ -42,6 +43,12 @@ class ActivatePage extends StatelessWidget {
                     final isActivate =
                         SettingsController().updateLicense(stringData);
                     if (isActivate == true) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const HomePage(),
+                        ),
+                      );
                       showDialog(
                         context: context,
                         builder: (_) => const SuccessDialog(),

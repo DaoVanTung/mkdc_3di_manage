@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mkdc_3di_manage/src/pages/home/home_page.dart';
 
 import '../../app_style.dart';
+import '../activate/activate_page.dart';
+import '../settings/controllers/settings_controller.dart';
 import 'controllers/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
@@ -51,7 +53,7 @@ class LoginPage extends StatelessWidget {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => const HomePage(),
+                                builder: (_) => const WrapperPage(),
                               ),
                             );
                           }
@@ -77,6 +79,24 @@ class LoginPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class WrapperPage extends StatelessWidget {
+  const WrapperPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListenableBuilder(
+      listenable: SettingsController(),
+      builder: (context, child) {
+        if (SettingsController().isActive) {
+          return const HomePage();
+        } else {
+          return const ActivatePage();
+        }
+      },
     );
   }
 }

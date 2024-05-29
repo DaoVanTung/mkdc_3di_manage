@@ -54,8 +54,8 @@ class SettingsController with ChangeNotifier {
   }
 
   Future<void> getUsers() async {
+    users.clear();
     final usersData = jsonDecode(await _threeDiService.getUsers());
-
     numberOfUser.value = usersData['count'] ?? 0;
 
     for (final data in usersData['results']) {
@@ -74,6 +74,7 @@ class SettingsController with ChangeNotifier {
   }
 
   Future<void> getApiKeys() async {
+    apiKeys.clear();
     final apiKeysData = jsonDecode(await _threeDiService.getApiKeys());
 
     for (final data in apiKeysData['results']) {

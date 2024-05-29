@@ -91,7 +91,7 @@ class ContentBoxInfo extends StatelessWidget {
                 text: const TextSpan(
                   children: [
                     TextSpan(
-                      text: '- Thời gian tính toán: ',
+                      text: '• Thời gian tính toán: ',
                     ),
                     TextSpan(
                       text: 'Không giới hạn',
@@ -107,7 +107,7 @@ class ContentBoxInfo extends StatelessWidget {
                 text: const TextSpan(
                   children: [
                     TextSpan(
-                      text: '- Giới hạn phiên làm việc: ',
+                      text: '• Giới hạn phiên làm việc: ',
                     ),
                     TextSpan(
                       text: '100',
@@ -123,7 +123,7 @@ class ContentBoxInfo extends StatelessWidget {
                 text: const TextSpan(
                   children: [
                     TextSpan(
-                      text: '- Ngày bắt đầu: ',
+                      text: '• Ngày bắt đầu: ',
                     ),
                     TextSpan(
                       text: '29/05/2024',
