@@ -37,22 +37,22 @@ class InfoBox extends StatelessWidget {
                   series: <CartesianSeries<UserData, String>>[
                     ColumnSeries<UserData, String>(
                       dataSource: [
-                        UserData('January', 35),
-                        UserData('February', 28),
-                        UserData('March', 34),
-                        UserData('April', 32),
-                        UserData('May', 40),
-                        UserData('June', 45),
-                        UserData('July', 52),
-                        UserData('August', 48),
-                        UserData('September', 42),
-                        UserData('October', 38),
-                        UserData('November', 30),
-                        UserData('December', 25),
+                        UserData('Tháng 1', 35),
+                        UserData('Tháng 2', 28),
+                        UserData('Tháng 3', 34),
+                        UserData('Tháng 4', 32),
+                        UserData('Tháng 5', 40),
+                        UserData('Tháng 6', 45),
+                        UserData('Tháng 7', 52),
+                        UserData('Tháng 8', 48),
+                        UserData('Tháng 9', 42),
+                        UserData('Tháng 10', 38),
+                        UserData('Tháng 11', 30),
+                        UserData('Tháng 12', 25),
                       ],
                       xValueMapper: (UserData users, _) => users.time,
                       yValueMapper: (UserData users, _) => users.length,
-                      name: 'Users',
+                      name: 'Người dùng',
                       dataLabelSettings: const DataLabelSettings(
                         isVisible: true,
                       ),
@@ -86,7 +86,7 @@ class NumberOfGroup extends StatelessWidget {
       )),
       child: Column(
         children: [
-          const Text('Groups'),
+          const Text('Tổ chức'),
           const SizedBox(height: AppStyle.padding24),
           RichText(
             text: const TextSpan(
@@ -99,7 +99,7 @@ class NumberOfGroup extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text: ' of 25',
+                  text: ' / 25',
                   style: TextStyle(
                     fontSize: AppStyle.fontSize20,
                     fontWeight: FontWeight.w300,
@@ -122,7 +122,7 @@ class NumberOfUser extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('Users'),
+        const Text('Người dùng'),
         const SizedBox(height: AppStyle.padding24),
         RichText(
           text: const TextSpan(
@@ -135,7 +135,7 @@ class NumberOfUser extends StatelessWidget {
                 ),
               ),
               TextSpan(
-                text: ' of 150',
+                text: ' / 150',
                 style: TextStyle(
                   fontSize: AppStyle.fontSize20,
                   fontWeight: FontWeight.w300,

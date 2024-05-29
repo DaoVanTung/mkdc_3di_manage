@@ -68,7 +68,7 @@ class ContentBoxInfo extends StatelessWidget {
         ),
         const SizedBox(height: AppStyle.padding16),
         const Text(
-          'RECENT SIMULATIONS',
+          'MÔ PHỎNG GẦN ĐÂY',
         ),
         const SizedBox(height: AppStyle.padding16),
         Container(
@@ -84,11 +84,11 @@ class ContentBoxInfo extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'An overview of recently finished simulations.',
+                'Tổng quan về các mô phỏng đã hoàn thành gần đây.',
               ),
               SizedBox(height: AppStyle.padding16),
               Text(
-                'Organisation thuyloi-university can use unlimited simulation hours.',
+                'Tổ chức Đại học Thủy Lợi có thể sử dụng số giờ mô phỏng không giới hạn.',
               ),
             ],
           ),

@@ -72,7 +72,7 @@ class NavBar extends StatelessWidget {
                     ),
                   ],
                   child: const Text(
-                    'Help',
+                    'Hỗ trợ',
                     style: TextStyle(
                       color: AppStyle.whiteColor,
                     ),
@@ -89,8 +89,10 @@ class NavBar extends StatelessWidget {
                   tooltip: 'Thao tác với người dùng',
                   itemBuilder: (_) => [
                     PopupMenuItem(
-                      onTap: () {},
-                      child: const Text('Thông tin người dùng'),
+                      onTap: () {
+                        showAboutDialog(context);
+                      },
+                      child: const Text('Giới thiệu'),
                     ),
                     PopupMenuItem(
                       onTap: () {
@@ -140,5 +142,78 @@ class NavBar extends StatelessWidget {
         );
       }
     });
+  }
+
+  void showAboutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) {
+        return Dialog(
+          child: Container(
+            width: 480,
+            color: AppStyle.whiteColor,
+            padding: const EdgeInsets.all(AppStyle.padding16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset('assets/images/license.png'),
+                const SizedBox(height: AppStyle.padding16),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(AppStyle.padding16),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey.shade300,
+                    ),
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Giấy phép của bạn',
+                        style: TextStyle(
+                          fontSize: AppStyle.fontSize16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: AppStyle.padding8),
+                      Text(
+                        'Giấy phép: JT29-DLHN-24MK',
+                      ),
+                      SizedBox(height: AppStyle.padding8),
+                      Text(
+                        'Ngày hết hạn: 30/06/2027',
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: AppStyle.padding16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(_);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: const RoundedRectangleBorder(),
+                        side: BorderSide.none,
+                        backgroundColor: AppStyle.menuColor,
+                      ),
+                      child: const Text(
+                        'Đóng',
+                        style: TextStyle(
+                          color: AppStyle.whiteColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }
