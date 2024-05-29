@@ -15,52 +15,61 @@ class ActivatePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppStyle.whiteColor,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Image.asset('assets/images/license.png'),
-            const SizedBox(height: AppStyle.padding12),
-            const Text(
-              'Vui lòng nhập giấy phép được cung cấp để truy cập ứng dụng.',
+        child: Container(
+          padding: const EdgeInsets.all(AppStyle.padding32),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.grey.shade300,
             ),
-            const SizedBox(height: AppStyle.padding32),
-            ElevatedButton(
-              onPressed: () async {
-                FilePickerResult? result =
-                    await FilePicker.platform.pickFiles();
-
-                if (result != null) {
-                  final stringData = await result.xFiles.first.readAsString();
-                  final isActivate =
-                      SettingsController().updateLicense(stringData);
-                  if (isActivate == true) {
-                    showDialog(
-                      context: context,
-                      builder: (_) => const SuccessDialog(),
-                    );
-                  } else {
-                    showDialog(
-                      context: context,
-                      builder: (_) => const ErrorDialog(),
-                    );
-                  }
-                } else {
-                  // User canceled the picker
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                shape: const RoundedRectangleBorder(),
-                side: BorderSide.none,
-                backgroundColor: AppStyle.menuColor,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Image.asset('assets/images/license.png'),
+              const SizedBox(height: AppStyle.padding12),
+              const Text(
+                'Vui lòng nhập giấy phép được cung cấp để truy cập ứng dụng.',
               ),
-              child: const Text(
-                'Chọn tệp giấy phép',
-                style: TextStyle(
-                  color: AppStyle.whiteColor,
+              const SizedBox(height: AppStyle.padding32),
+              ElevatedButton(
+                onPressed: () async {
+                  FilePickerResult? result =
+                      await FilePicker.platform.pickFiles();
+
+                  if (result != null) {
+                    final stringData = await result.xFiles.first.readAsString();
+                    final isActivate =
+                        SettingsController().updateLicense(stringData);
+                    if (isActivate == true) {
+                      showDialog(
+                        context: context,
+                        builder: (_) => const SuccessDialog(),
+                      );
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (_) => const ErrorDialog(),
+                      );
+                    }
+                  } else {
+                    // User canceled the picker
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: const RoundedRectangleBorder(),
+                  side: BorderSide.none,
+                  backgroundColor: AppStyle.menuColor,
+                ),
+                child: const Text(
+                  'Chọn tệp giấy phép',
+                  style: TextStyle(
+                    color: AppStyle.whiteColor,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

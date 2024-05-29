@@ -23,6 +23,7 @@ class SettingsController with ChangeNotifier {
 
   Future<void> loadSettings() async {
     final license = await _settingsService.getLicense();
+
     if (license.isNotEmpty) {
       isActive = true;
       getUsers();
@@ -35,7 +36,7 @@ class SettingsController with ChangeNotifier {
 
   bool updateLicense(String license) {
     if (validateLicense(license)) {
-      _settingsService.updateLicense(license);
+      _settingsService.updateLicense('license');
       isActive = true;
       notifyListeners();
       return true;
