@@ -86,10 +86,10 @@ class ContentBoxInfo extends StatelessWidget {
               Text(
                 'Tổng quan về các mô phỏng đã hoàn thành gần đây.',
               ),
-              SizedBox(height: AppStyle.padding16),
-              Text(
-                'Tổ chức Đại học Thủy Lợi có thể sử dụng số giờ mô phỏng không giới hạn.',
-              ),
+              // SizedBox(height: AppStyle.padding16),
+              // Text(
+              //   'Tổ chức Đại học Thủy Lợi có thể sử dụng số giờ mô phỏng không giới hạn.',
+              // ),
             ],
           ),
         ),
@@ -130,51 +130,86 @@ class SimulationDataTable extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: ListenableBuilder(
-            listenable: controller,
-            builder: (context, child) {
-              return DataTable(
-                showCheckboxColumn: false,
-                columns: const [
-                  DataColumn(label: Text('ID')),
-                  DataColumn(label: Text('Name')),
-                  DataColumn(label: Text('Model')),
-                  DataColumn(label: Text('User')),
-                  DataColumn(label: Text('Status')),
-                  DataColumn(label: Text('Type')),
-                  DataColumn(label: Text('Start Time')),
-                  DataColumn(label: Text('Length')),
-                ],
-                rows: [
-                  for (final item in controller.simulations)
-                    DataRow(
-                      cells: [
-                        DataCell(Text(item.id)),
-                        DataCell(Text(item.name)),
-                        DataCell(Text(item.modelName)),
-                        DataCell(Text(item.username)),
-                        DataCell(Text(item.status)),
-                        DataCell(Text(item.type)),
-                        DataCell(Text(
-                          DateTime.tryParse(item.started) != null
-                              ? DateFormat('dd/MM/yyyy HH:mm:ss')
-                                  .format(DateTime.parse(item.started))
-                                  .toString()
-                              : item.started,
-                        )),
-                        DataCell(Text(formatTotalTime(item.totalTime))),
-                      ],
-                      onSelectChanged: (value) {
-                        if (value == true) {
-                          controller.onSelectSimulation(item);
-                        }
-                      },
+        Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                onFieldSubmitted: (value) {
+                  controller.onSearchSummit(value);
+                },
+                style: const TextStyle(
+                  fontSize: AppStyle.fontSize14,
+                ),
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.zero,
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
                     ),
-                ],
-              );
-            },
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.zero,
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    size: AppStyle.iconSize20,
+                  ),
+                  hintText: 'Tìm kiếm',
+                ),
+              ),
+            ),
+          ],
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: ListenableBuilder(
+              listenable: controller,
+              builder: (context, child) {
+                return DataTable(
+                  showCheckboxColumn: false,
+                  columns: const [
+                    DataColumn(label: Text('ID')),
+                    DataColumn(label: Text('Name')),
+                    DataColumn(label: Text('Model')),
+                    DataColumn(label: Text('User')),
+                    DataColumn(label: Text('Status')),
+                    DataColumn(label: Text('Type')),
+                    DataColumn(label: Text('Start Time')),
+                    DataColumn(label: Text('Length')),
+                  ],
+                  rows: [
+                    for (final item in controller.simulations)
+                      DataRow(
+                        cells: [
+                          DataCell(Text(item.id)),
+                          DataCell(Text(item.name)),
+                          DataCell(Text(item.modelName)),
+                          DataCell(Text(item.username)),
+                          DataCell(Text(item.status)),
+                          DataCell(Text(item.type)),
+                          DataCell(Text(
+                            DateTime.tryParse(item.started) != null
+                                ? DateFormat('dd/MM/yyyy HH:mm:ss')
+                                    .format(DateTime.parse(item.started))
+                                    .toString()
+                                : item.started,
+                          )),
+                          DataCell(Text(formatTotalTime(item.totalTime))),
+                        ],
+                        onSelectChanged: (value) {
+                          if (value == true) {
+                            controller.onSelectSimulation(item);
+                          }
+                        },
+                      ),
+                  ],
+                );
+              },
+            ),
           ),
         ),
         ListenableBuilder(

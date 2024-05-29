@@ -12,15 +12,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: AppStyle.whiteColor,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            NavBar(),
-            InfoBox(),
-            ContentBox(),
-            SizedBox(height: AppStyle.padding16),
-          ],
-        ),
+      body: Column(
+        children: [
+          NavBar(),
+          InfoBox(),
+          Expanded(child: ContentBox()),
+          SizedBox(height: AppStyle.padding16),
+        ],
       ),
     );
   }

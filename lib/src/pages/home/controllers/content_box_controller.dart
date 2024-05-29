@@ -18,8 +18,9 @@ class ContentBoxController extends ChangeNotifier {
 
   List<SimulationModel> simulations = [];
   int currentPage = 0;
-  int itemsPerPage = 10;
+  int itemsPerPage = 15;
   int numberOfPage = 0;
+  String? currentKeyword;
 
   ValueNotifier<bool> isLoading = ValueNotifier(false);
 
@@ -30,10 +31,15 @@ class ContentBoxController extends ChangeNotifier {
     final body = await _threeDiService.getSimulations(
       limit: itemsPerPage,
       offset: currentPage * itemsPerPage,
+      keyword: currentKeyword,
     );
     final data = json.decode(body);
 
     numberOfPage = ((data['count'] + itemsPerPage - 1) / itemsPerPage).toInt();
+
+    if (numberOfPage <= 0) {
+      numberOfPage = 1;
+    }
 
     for (final item in data['results']) {
       final simulation = SimulationModel(
@@ -120,5 +126,10 @@ class ContentBoxController extends ChangeNotifier {
 
   void launchUrl(String url) {
     html.window.open(url, '');
+  }
+
+  void onSearchSummit(String? keyword) {
+    currentKeyword = keyword;
+    getSimulations();
   }
 }
