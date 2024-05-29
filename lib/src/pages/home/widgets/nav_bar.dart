@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../app_style.dart';
 import '../../../services/auth_service.dart';
 import '../../login/login_page.dart';
-import '../../settings/controllers/settings_controller.dart';
 import 'license_form.dart';
 
 class NavBar extends StatelessWidget {
@@ -51,33 +50,6 @@ class NavBar extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               children: [
-                PopupMenuButton(
-                  color: AppStyle.whiteColor,
-                  tooltip: '',
-                  itemBuilder: (_) => [
-                    if (!SettingsController().isActive)
-                      PopupMenuItem(
-                        onTap: () {
-                          onActiveButtonPressed(context);
-                        },
-                        child: const Text('Kích hoạt'),
-                      ),
-                    PopupMenuItem(
-                      onTap: () {},
-                      child: const Text('Tài liệu hướng dẫn'),
-                    ),
-                    PopupMenuItem(
-                      onTap: () {},
-                      child: const Text('Hỗ trợ'),
-                    ),
-                  ],
-                  child: const Text(
-                    'Hỗ trợ',
-                    style: TextStyle(
-                      color: AppStyle.whiteColor,
-                    ),
-                  ),
-                ),
                 const SizedBox(width: AppStyle.padding16),
                 const CircleAvatar(
                   radius: AppStyle.padding12,
@@ -93,6 +65,20 @@ class NavBar extends StatelessWidget {
                         showAboutDialog(context);
                       },
                       child: const Text('Giới thiệu'),
+                    ),
+                    PopupMenuItem(
+                      onTap: () {
+                        showAboutDialog(context);
+                      },
+                      child: const Text('Cấu hình'),
+                    ),
+                    PopupMenuItem(
+                      onTap: () {},
+                      child: const Text('Tài liệu hướng dẫn'),
+                    ),
+                    PopupMenuItem(
+                      onTap: () {},
+                      child: const Text('Hỗ trợ'),
                     ),
                     PopupMenuItem(
                       onTap: () {
@@ -166,23 +152,25 @@ class NavBar extends StatelessWidget {
                       color: Colors.grey.shade300,
                     ),
                   ),
-                  child: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        'Giấy phép của bạn',
+                      Image.asset(
+                        'assets/images/correct.png',
+                        width: 40,
+                        height: 40,
+                      ),
+                      const SizedBox(height: AppStyle.padding16),
+                      const Text(
+                        'Kích hoạt thành công',
                         style: TextStyle(
                           fontSize: AppStyle.fontSize16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: AppStyle.padding8),
-                      Text(
-                        'Giấy phép: JT29-DLHN-24MK',
-                      ),
-                      SizedBox(height: AppStyle.padding8),
-                      Text(
-                        'Ngày hết hạn: 30/06/2027',
+                      const SizedBox(height: AppStyle.padding8),
+                      const Text(
+                        'Giấy phép của bạn có hiệu lực đến: 30/06/2027',
                       ),
                     ],
                   ),
