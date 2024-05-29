@@ -37,18 +37,11 @@ class InfoBox extends StatelessWidget {
                   series: <CartesianSeries<UserData, String>>[
                     ColumnSeries<UserData, String>(
                       dataSource: [
-                        UserData('Tháng 1', 35),
-                        UserData('Tháng 2', 28),
-                        UserData('Tháng 3', 34),
-                        UserData('Tháng 4', 32),
-                        UserData('Tháng 5', 40),
-                        UserData('Tháng 6', 45),
-                        UserData('Tháng 7', 52),
-                        UserData('Tháng 8', 48),
-                        UserData('Tháng 9', 42),
-                        UserData('Tháng 10', 38),
-                        UserData('Tháng 11', 30),
-                        UserData('Tháng 12', 25),
+                        UserData('1/2024', 35),
+                        UserData('2/2024', 28),
+                        UserData('3/2024', 34),
+                        UserData('4/2024', 32),
+                        UserData('5/2024', 40),
                       ],
                       xValueMapper: (UserData users, _) => users.time,
                       yValueMapper: (UserData users, _) => users.length,
@@ -86,26 +79,26 @@ class NumberOfGroup extends StatelessWidget {
       )),
       child: Column(
         children: [
-          const Text('Tổ chức'),
-          const SizedBox(height: AppStyle.padding24),
+          const Text('Người dùng'),
+          const SizedBox(height: AppStyle.padding8),
           RichText(
             text: const TextSpan(
               children: [
                 TextSpan(
-                  text: '2',
+                  text: '25',
                   style: TextStyle(
-                    fontSize: AppStyle.fontSize32,
+                    fontSize: 48,
                     fontWeight: FontWeight.w300,
                   ),
                 ),
-                TextSpan(
-                  text: ' / 25',
-                  style: TextStyle(
-                    fontSize: AppStyle.fontSize20,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.grey,
-                  ),
-                ),
+                // TextSpan(
+                //   text: ' / 25',
+                //   style: TextStyle(
+                //     fontSize: AppStyle.fontSize20,
+                //     fontWeight: FontWeight.w300,
+                //     color: Colors.grey,
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -122,26 +115,26 @@ class NumberOfUser extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('Người dùng'),
-        const SizedBox(height: AppStyle.padding24),
+        const Text('Simulation'),
+        const SizedBox(height: AppStyle.padding8),
         RichText(
           text: const TextSpan(
             children: [
               TextSpan(
                 text: '52',
                 style: TextStyle(
-                  fontSize: AppStyle.fontSize32,
+                  fontSize: 48,
                   fontWeight: FontWeight.w300,
                 ),
               ),
-              TextSpan(
-                text: ' / 150',
-                style: TextStyle(
-                  fontSize: AppStyle.fontSize20,
-                  fontWeight: FontWeight.w300,
-                  color: Colors.grey,
-                ),
-              ),
+              // TextSpan(
+              //   text: ' / 150',
+              //   style: TextStyle(
+              //     fontSize: AppStyle.fontSize20,
+              //     fontWeight: FontWeight.w300,
+              //     color: Colors.grey,
+              //   ),
+              // ),
             ],
           ),
         ),

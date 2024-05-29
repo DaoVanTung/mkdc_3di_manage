@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:number_paginator/number_paginator.dart';
 import 'package:intl/intl.dart';
+import 'package:number_paginator/number_paginator.dart';
 
 import '../../../app_style.dart';
 import '../controllers/content_box_controller.dart';
@@ -68,7 +68,7 @@ class ContentBoxInfo extends StatelessWidget {
         ),
         const SizedBox(height: AppStyle.padding16),
         const Text(
-          'MÔ PHỎNG GẦN ĐÂY',
+          'THÔNG TIN SỬ DỤNG',
         ),
         const SizedBox(height: AppStyle.padding16),
         Container(
@@ -80,16 +80,60 @@ class ContentBoxInfo extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(4.0),
           ),
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Tổng quan về các mô phỏng đã hoàn thành gần đây.',
+              const Text(
+                'Thông tin tài nguyên sử dụng phục vụ tính toán và mô phỏng của Trung tâm Dữ liệu - MKDC.',
               ),
-              // SizedBox(height: AppStyle.padding16),
-              // Text(
-              //   'Tổ chức Đại học Thủy Lợi có thể sử dụng số giờ mô phỏng không giới hạn.',
-              // ),
+              const SizedBox(height: AppStyle.padding16),
+              RichText(
+                text: const TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '- Thời gian tính toán: ',
+                    ),
+                    TextSpan(
+                      text: 'Không giới hạn',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: AppStyle.padding4),
+              RichText(
+                text: const TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '- Giới hạn phiên làm việc: ',
+                    ),
+                    TextSpan(
+                      text: '100',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: AppStyle.padding4),
+              RichText(
+                text: const TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '- Ngày bắt đầu: ',
+                    ),
+                    TextSpan(
+                      text: '29/05/2024',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -163,50 +207,59 @@ class SimulationDataTable extends StatelessWidget {
             ),
           ],
         ),
+        const SizedBox(height: AppStyle.padding8),
         Expanded(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: ListenableBuilder(
               listenable: controller,
               builder: (context, child) {
-                return DataTable(
-                  showCheckboxColumn: false,
-                  columns: const [
-                    DataColumn(label: Text('ID')),
-                    DataColumn(label: Text('Name')),
-                    DataColumn(label: Text('Model')),
-                    DataColumn(label: Text('User')),
-                    DataColumn(label: Text('Status')),
-                    DataColumn(label: Text('Type')),
-                    DataColumn(label: Text('Start Time')),
-                    DataColumn(label: Text('Length')),
-                  ],
-                  rows: [
-                    for (final item in controller.simulations)
-                      DataRow(
-                        cells: [
-                          DataCell(Text(item.id)),
-                          DataCell(Text(item.name)),
-                          DataCell(Text(item.modelName)),
-                          DataCell(Text(item.username)),
-                          DataCell(Text(item.status)),
-                          DataCell(Text(item.type)),
-                          DataCell(Text(
-                            DateTime.tryParse(item.started) != null
-                                ? DateFormat('dd/MM/yyyy HH:mm:ss')
-                                    .format(DateTime.parse(item.started))
-                                    .toString()
-                                : item.started,
-                          )),
-                          DataCell(Text(formatTotalTime(item.totalTime))),
-                        ],
-                        onSelectChanged: (value) {
-                          if (value == true) {
-                            controller.onSelectSimulation(item);
-                          }
-                        },
-                      ),
-                  ],
+                return SingleChildScrollView(
+                  child: DataTable(
+                    showCheckboxColumn: false,
+                    headingRowColor: const WidgetStatePropertyAll(
+                      AppStyle.menuColor,
+                    ),
+                    headingTextStyle: const TextStyle(
+                      color: AppStyle.whiteColor,
+                    ),
+                    columns: const [
+                      DataColumn(label: Text('ID')),
+                      DataColumn(label: Text('Name')),
+                      DataColumn(label: Text('Model')),
+                      DataColumn(label: Text('User')),
+                      DataColumn(label: Text('Status')),
+                      DataColumn(label: Text('Type')),
+                      DataColumn(label: Text('Start Time')),
+                      DataColumn(label: Text('Length')),
+                    ],
+                    rows: [
+                      for (final item in controller.simulations)
+                        DataRow(
+                          cells: [
+                            DataCell(Text(item.id)),
+                            DataCell(Text(item.name)),
+                            DataCell(Text(item.modelName)),
+                            DataCell(Text(item.username)),
+                            DataCell(Text(item.status)),
+                            DataCell(Text(item.type)),
+                            DataCell(Text(
+                              DateTime.tryParse(item.started) != null
+                                  ? DateFormat('dd/MM/yyyy HH:mm:ss')
+                                      .format(DateTime.parse(item.started))
+                                      .toString()
+                                  : item.started,
+                            )),
+                            DataCell(Text(formatTotalTime(item.totalTime))),
+                          ],
+                          onSelectChanged: (value) {
+                            if (value == true) {
+                              controller.onSelectSimulation(item);
+                            }
+                          },
+                        ),
+                    ],
+                  ),
                 );
               },
             ),
