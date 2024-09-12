@@ -12,7 +12,7 @@ class AuthService {
 
   Future<bool> login() async {
     const loginUrl =
-        '${AppConstant.ssoHost}./oauth2/authorize?client_id=${AppConstant.clientId}&redirect_uri=${AppConstant.callbackUrl}&response_type=code&scope=openid';
+        '${AppConstant.ssoHost}/oauth2/authorize?client_id=${AppConstant.clientId}&redirect_uri=${AppConstant.callbackUrl}&response_type=code&scope=openid';
     final loginTab = html.window.open(
       loginUrl,
       'MKDC Sign in',
@@ -34,10 +34,8 @@ class AuthService {
 
     final urlToken = Uri.parse('${AppConstant.ssoHost}/oauth2/token');
     final response = await http.post(urlToken, body: body);
-    final responseBody = jsonDecode(response.body) as Map<String, dynamic>;
 
-    // print(responseBody['access_token']);
-    // print(responseBody['id_token']);
+    final responseBody = jsonDecode(response.body) as Map<String, dynamic>;
 
     await storage.write(
       key: 'access_token',

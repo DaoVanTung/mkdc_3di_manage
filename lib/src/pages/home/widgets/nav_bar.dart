@@ -1,9 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:mkdc_3di_manage/src/pages/settings/settings_page.dart';
 
 import '../../../app_style.dart';
 import '../../../services/auth_service.dart';
 import '../../login/login_page.dart';
+import '../../settings/settings_page.dart';
 import 'license_form.dart';
 
 class NavBar extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mkdc_3di_manage/src/pages/home/home_page.dart';
 
 import '../../app_style.dart';
 import '../activate/activate_page.dart';
+import '../home/home_page.dart';
 import '../settings/controllers/settings_controller.dart';
 import 'controllers/login_controller.dart';
 
@@ -47,10 +47,11 @@ class LoginPage extends StatelessWidget {
                   builder: (context, value, child) {
                     if (value == true) return const CircularProgressIndicator();
                     return ElevatedButton(
-                      onPressed: () async {
+                      onPressed: () {
                         controller.login().then((value) {
                           if (value) {
                             Navigator.pushReplacement(
+                              // ignore: use_build_context_synchronously
                               context,
                               MaterialPageRoute(
                                 builder: (_) => const WrapperPage(),
