@@ -22,15 +22,16 @@ class SettingsController with ChangeNotifier {
   List<ApiKeyModel> apiKeys = [];
 
   Future<void> loadSettings() async {
-    final license = await _settingsService.getLicense();
+    // final license = await _settingsService.getLicense();
 
-    if (license.isNotEmpty) {
-      isActive = true;
-      getUsers();
-    }
+    // if (license.isNotEmpty) {
+    //   isActive = true;
+    //   getUsers();
+    // }
 
-    // _settingsService.removeLicense();
+    // notifyListeners();
 
+    isActive = true;
     notifyListeners();
   }
 
