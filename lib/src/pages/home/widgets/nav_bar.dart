@@ -80,14 +80,14 @@ class NavBar extends StatelessWidget {
                       },
                       child: const Text('Cấu hình'),
                     ),
-                    PopupMenuItem(
-                      onTap: () {},
-                      child: const Text('Tài liệu hướng dẫn'),
-                    ),
-                    PopupMenuItem(
-                      onTap: () {},
-                      child: const Text('Hỗ trợ'),
-                    ),
+                    // PopupMenuItem(
+                    //   onTap: () {},
+                    //   child: const Text('Tài liệu hướng dẫn'),
+                    // ),
+                    // PopupMenuItem(
+                    //   onTap: () {},
+                    //   child: const Text('Hỗ trợ'),
+                    // ),
                     PopupMenuItem(
                       onTap: () {
                         AuthService().logout().then((value) {
