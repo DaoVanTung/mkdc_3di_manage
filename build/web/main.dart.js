@@ -91655,7 +91655,7 @@ jI(){var s=0,r=A.N(t.y),q,p,o,n,m,l,k,j
 var $async$jI=A.O(function(a,b){if(a===1)return A.K(b,r)
 while(true)switch(s){case 0:k=window
 k.toString
-p=B.AG.a0f(k,"https://sso.mkdc.com.vn/oauth2/authorize?client_id=fTfy_R_ngljzkpVDBABz5cGXZJwa&redirect_uri=http://localhost:5000/callback.html&response_type=code&scope=openid","MKDC Sign in")
+p=B.AG.a0f(k,"https://sso.mkdc.com.vn/oauth2/authorize?client_id=fTfy_R_ngljzkpVDBABz5cGXZJwa&redirect_uri=https://simcenter.mkdc.com.vn/callback.html&response_type=code&scope=openid","MKDC Sign in")
 k=window
 k.toString
 j=new A.alt([],[])
@@ -91664,7 +91664,7 @@ return A.P(new A.Fd(k,"message",!1,t.Cf).KU(0,new A.a2b()),$async$jI)
 case 3:o=j.arF(b.data,!0)
 J.awI(p)
 k=t.N
-n=A.ay(["grant_type","authorization_code","code",o,"redirect_uri","http://localhost:5000/callback.html","client_id","fTfy_R_ngljzkpVDBABz5cGXZJwa","client_secret","Z_MCvx2I3Bpr14TfN5mIf1uIKN8a","scope","openid profile email"],k,k)
+n=A.ay(["grant_type","authorization_code","code",o,"redirect_uri","https://simcenter.mkdc.com.vn/callback.html","client_id","fTfy_R_ngljzkpVDBABz5cGXZJwa","client_secret","Z_MCvx2I3Bpr14TfN5mIf1uIKN8a","scope","openid profile email"],k,k)
 s=4
 return A.P(A.aY4(A.ef("https://sso.mkdc.com.vn/oauth2/token"),n),$async$jI)
 case 4:m=b
@@ -91688,7 +91688,7 @@ s=3
 return A.P(B.ec.vV(0,"access_token"),$async$t3)
 case 3:s=4
 return A.P(B.ec.vV(0,"id_token"),$async$t3)
-case 4:window.location.replace("https://sso.mkdc.com.vn/oidc/logout?id_token_hint="+A.j(q)+"&post_logout_redirect_uri=http://localhost:5000&state=0")
+case 4:window.location.replace("https://sso.mkdc.com.vn/oidc/logout?id_token_hint="+A.j(q)+"&post_logout_redirect_uri=https://simcenter.mkdc.com.vn&state=0")
 return A.L(null,r)}})
 return A.M($async$t3,r)}}
 A.a2b.prototype={
