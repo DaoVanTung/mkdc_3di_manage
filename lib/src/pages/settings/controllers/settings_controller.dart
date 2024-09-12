@@ -32,6 +32,7 @@ class SettingsController with ChangeNotifier {
     // notifyListeners();
 
     isActive = true;
+    getUsers();
     notifyListeners();
   }
 
